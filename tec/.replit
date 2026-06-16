@@ -12,7 +12,7 @@ deploymentTarget = "autoscale"
 
 [deployment.postBuild]
 args = ["pnpm", "store", "prune"]
-env = { "CI" = "true" }
+env = { "CI" : "true" }
 
 [workflows]
 runButton = "Project"
@@ -20,7 +20,6 @@ runButton = "Project"
 [agent]
 stack = "PNPM_WORKSPACE"
 expertMode = true
-integrations = ["stripe:1.0.0"]
 
 [postMerge]
 path = "scripts/post-merge.sh"
