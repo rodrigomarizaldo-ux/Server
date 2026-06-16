@@ -1,0 +1,46 @@
+{
+  "expo": {
+    "name": "Tecmaquinas Tecnologia SAAS",
+    "slug": "tecmaquinastecnologiasaas",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/tecmaquinas-icon.jpeg",
+    "scheme": "tecmaquinastecnologiasaas",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/tecmaquinas-icon.jpeg",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "icon": "./assets/images/tecmaquinas-icon.jpeg",
+      "bundleIdentifier": "com.tecmaquinastecnologiasaas.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/tecmaquinas-icon.jpeg",
+        "backgroundColor": "#000000"
+      },
+      "package": "com.tecmaquinastecnologiasaas.app"
+    },
+    "web": {
+      "favicon": "./assets/images/tecmaquinas-icon.jpeg"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "c4b6f694-3007-41c5-8b8c-ddd4d54d8c1b"
+      }
+    }
+  }
+}

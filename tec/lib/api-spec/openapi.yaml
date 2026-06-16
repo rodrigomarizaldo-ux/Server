@@ -1,0 +1,262 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API de Gerenciamento de Máquinas Pesadas
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: machines
+    description: Operações de máquinas pesadas
+paths:
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+
+  /machines:
+    get:
+      operationId: listMachines
+      tags: [machines]
+      summary: Listar máquinas
+      description: Retorna todas as máquinas cadastradas
+      responses:
+        "200":
+          description: Lista de máquinas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Machine"
+
+    post:
+      operationId: createMachine
+      tags: [machines]
+      summary: Cadastrar máquina
+      description: Cria um novo cadastro de máquina pesada
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateMachineInput"
+      responses:
+        "201":
+          description: Máquina cadastrada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Machine"
+        "400":
+          description: Dados inválidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /machines/{id}:
+    get:
+      operationId: getMachine
+      tags: [machines]
+      summary: Buscar máquina
+      description: Retorna os dados de uma máquina pelo ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Dados da máquina
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Machine"
+        "404":
+          description: Máquina não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    put:
+      operationId: updateMachine
+      tags: [machines]
+      summary: Editar máquina
+      description: Atualiza os dados de uma máquina existente
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateMachineInput"
+      responses:
+        "200":
+          description: Máquina atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Machine"
+        "400":
+          description: Dados inválidos
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Máquina não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+    delete:
+      operationId: deleteMachine
+      tags: [machines]
+      summary: Excluir máquina
+      description: Remove o cadastro de uma máquina
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Máquina excluída com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteResponse"
+        "404":
+          description: Máquina não encontrada
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+components:
+  schemas:
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+
+    Machine:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identificador único da máquina
+        model:
+          type: string
+          description: Modelo da máquina
+        brand:
+          type: string
+          description: Marca da máquina
+        year:
+          type: integer
+          description: Ano de fabricação
+        serialNumber:
+          type: string
+          description: Número de série
+        createdAt:
+          type: string
+          format: date-time
+          description: Data de cadastro
+        updatedAt:
+          type: string
+          format: date-time
+          description: Data da última atualização
+      required:
+        - id
+        - model
+        - brand
+        - year
+        - serialNumber
+        - createdAt
+        - updatedAt
+
+    CreateMachineInput:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Modelo da máquina
+        brand:
+          type: string
+          description: Marca da máquina
+        year:
+          type: integer
+          description: Ano de fabricação
+          minimum: 1900
+          maximum: 2100
+        serialNumber:
+          type: string
+          description: Número de série único
+      required:
+        - model
+        - brand
+        - year
+        - serialNumber
+
+    UpdateMachineInput:
+      type: object
+      properties:
+        model:
+          type: string
+          description: Modelo da máquina
+        brand:
+          type: string
+          description: Marca da máquina
+        year:
+          type: integer
+          description: Ano de fabricação
+          minimum: 1900
+          maximum: 2100
+        serialNumber:
+          type: string
+          description: Número de série único
+
+    DeleteResponse:
+      type: object
+      properties:
+        message:
+          type: string
+      required:
+        - message
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+        - message

@@ -1,0 +1,11 @@
+{
+  "build": {
+    "builder": "NIXPACKS",
+    "buildCommand": "pnpm install && pnpm build",
+    "nixpacksConfig": {
+      "installPhase": {
+        "cmds": ["npm install -g pnpm"]
+      }
+    }
+  }
+}
