@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "cd artifacts/api-server && pnpm run build",
+    "build": "cd artifacts/api-server && npm run build",
     "start": "vite preview --host 0.0.0.0 --port $PORT"
   },
   "private": true,
