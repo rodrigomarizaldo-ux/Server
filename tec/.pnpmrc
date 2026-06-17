@@ -2,3 +2,4 @@ auto-install-peers=true
 shamefully-hoist=true
 ignore-scripts=false
 allow-scripts=true
+node-linker=hoisted
