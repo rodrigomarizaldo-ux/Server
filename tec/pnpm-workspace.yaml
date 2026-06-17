@@ -26,6 +26,7 @@
 #
 # ============================================================================
 minimumReleaseAge: 1440
+minimumReleaseAgeExclude: esbuild
 
 packages:
   - artifacts/*
