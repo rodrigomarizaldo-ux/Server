@@ -1,2 +1,4 @@
 auto-install-peers=true
-build-workspace-packages=true
+shamefully-hoist=true
+ignore-scripts=false
+allow-scripts=true
