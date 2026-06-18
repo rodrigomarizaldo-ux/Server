@@ -58,6 +58,5 @@ catalog:
   vite: ^7.3.0
   zod: ^3.25.76
 
+allowBuilds: true
 autoInstallPeers: false
-allowBuilds: True
-pnpm approve-builds
