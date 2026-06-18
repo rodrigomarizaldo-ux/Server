@@ -60,3 +60,4 @@ catalog:
 
 autoInstallPeers: false
 allowBuilds: True
+pnpm approve-builds
