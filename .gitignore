@@ -3,3 +3,7 @@ tec/node_modules/
 tec/.local
 
 tec/artifacts/mockup-sandbox/node_modules
+
+tec/artifacts/api-server/node_modules
+
+tec/scripts/node_modules
