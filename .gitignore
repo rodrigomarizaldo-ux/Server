@@ -1,3 +1,5 @@
 tec/node_modules/
 
 tec/.local
+
+tec/artifacts/mockup-sandbox/node_modules
