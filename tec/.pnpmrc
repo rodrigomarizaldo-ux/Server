@@ -1,2 +1,3 @@
 auto-install-peers=true
-dedupe-peer-dependents=true
+ignore-scripts=false
+auto-install-peers=true
