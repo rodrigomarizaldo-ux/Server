@@ -1,3 +1,2 @@
 auto-install-peers=true
 ignore-scripts=false
-public-hoist-pattern[]=*esbuild*
