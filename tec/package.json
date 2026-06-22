@@ -2,11 +2,11 @@
   "name": "workspace",
   "version": "0.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "pnpm -C artifacts/api-server run build",
-    "start":  "node artifacts/api-server/dist/src/index.js"
+    "start": "node artifacts/api-server/dist/src/index.js"
   },
-  "private": true,
   "dependencies": {
     "cors": "^2",
     "drizzle-orm": "catalog:",
