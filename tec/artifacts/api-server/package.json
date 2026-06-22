@@ -4,9 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development tsx ./src/index.ts",
-    "build": "tsx --tsconfig tsconfig.json ./build.ts",
-    "typecheck": "tsc -p tsconfig.json --noEmit"
+    "dev": "NODE_ENV=development pnpm exec tsx ./src/index.ts",
+    "build": "pnpm exec tsc -p tsconfig.json",
+    "typecheck": "pnpm exec tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
     "@workspace/api-zod": "workspace:*",
