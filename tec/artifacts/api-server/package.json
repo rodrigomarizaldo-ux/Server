@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "NODE_ENV=development pnpm exec tsx ./src/index.ts",
+    "start": "NODE_ENV=production pnpm exec tsx ./src/index.ts",
     "build": "node ./build.mjs",
     "typecheck": "pnpm exec tsc -p tsconfig.json --noEmit"
   },
