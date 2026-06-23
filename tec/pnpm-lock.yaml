@@ -522,12 +522,9 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 25.9.4
-      esbuild:
-        specifier: ^0.21.0
-        version: 0.21.5
-      tsx:
-        specifier: 'catalog:'
-        version: 4.22.4
+      typescript:
+        specifier: ~5.9.2
+        version: 5.9.3
 
 packages:
 
