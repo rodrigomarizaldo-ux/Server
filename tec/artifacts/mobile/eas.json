@@ -11,6 +11,9 @@
     "production": {
       "android": {
         "buildType": "app-bundle"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://server-production-64cf.up.railway.app"
       }
     }
   },
