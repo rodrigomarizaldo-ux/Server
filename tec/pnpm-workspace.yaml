@@ -5,7 +5,7 @@ packages:
   - scripts
 
 allowBuilds: { esbuild: true }
-autoInstallPeers: false
+autoInstallPeers: true
 
 catalog:
   '@replit/vite-plugin-cartographer': ^0.5.0
