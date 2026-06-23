@@ -6,9 +6,9 @@
  * OpenAPI spec version: 0.1.0
  */
 
-export * from "./createMachineInput";
-export * from "./deleteResponse";
-export * from "./errorResponse";
-export * from "./healthStatus";
-export * from "./machine";
-export * from "./updateMachineInput";
+export * from "./createMachineInput.js";
+export * from "./deleteResponse.js";
+export * from "./errorResponse.js";
+export * from "./healthStatus.js";
+export * from "./machine.js";
+export * from "./updateMachineInput.js";

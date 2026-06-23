@@ -1,5 +1,5 @@
 import { pgTable, text, timestamp, integer, jsonb } from "drizzle-orm/pg-core";
-import { usersTable } from "./users";
+import { usersTable } from "./users.js";
 
 export const cloudMachinesTable = pgTable("cloud_machines", {
   id:           text("id").primaryKey(),

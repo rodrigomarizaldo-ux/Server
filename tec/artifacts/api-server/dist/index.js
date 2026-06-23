@@ -1,8 +1,7 @@
 import { pool } from "@workspace/db";
 import app from "./app.js";
-
 async function initCloudTables() {
-  await pool.query(`
+    await pool.query(`
     CREATE TABLE IF NOT EXISTS cloud_machines (
       id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL REFERENCES users(id) ON DELETE CASCADE,
@@ -35,27 +34,24 @@ async function initCloudTables() {
       created_at TIMESTAMP NOT NULL
     );
   `);
-  console.log("Cloud tables ready");
+    console.log("Cloud tables ready");
 }
-
 async function main() {
-  const rawPort = process.env["PORT"];
-  if (!rawPort) {
-    throw new Error("PORT environment variable is required but was not provided.");
-  }
-  const port = Number(rawPort);
-  if (Number.isNaN(port) || port <= 0) {
-    throw new Error(`Invalid PORT value: "${rawPort}"`);
-  }
-
-  await initCloudTables();
-
-  app.listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-  });
+    const rawPort = process.env["PORT"];
+    if (!rawPort) {
+        throw new Error("PORT environment variable is required but was not provided.");
+    }
+    const port = Number(rawPort);
+    if (Number.isNaN(port) || port <= 0) {
+        throw new Error(`Invalid PORT value: "${rawPort}"`);
+    }
+    await initCloudTables();
+    app.listen(port, () => {
+        console.log(`Server listening on port ${port}`);
+    });
 }
-
 main().catch((err) => {
-  console.error("Fatal startup error:", err);
-  process.exit(1);
+    console.error("Fatal startup error:", err);
+    process.exit(1);
 });
+//# sourceMappingURL=index.js.map
