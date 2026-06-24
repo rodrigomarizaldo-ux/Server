@@ -102,7 +102,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const register = useCallback(
     async (username: string, password: string): Promise<{ error?: string }> => {
       try {
-        const res = await fetch(apiUrl("/auth/register"), {
+        const url = apiUrl("/auth/register");
+        console.log("[AuthContext] Tentando Registro em:", url);
+        const res = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
@@ -111,7 +113,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (!res.ok) return { error: data.error ?? "Erro ao criar conta" };
         await persistSession({ token: data.token, user: data.user });
         return {};
-      } catch {
+      } catch (err: any) {
+        console.error("[AuthContext] Erro no Registro:", err);
         return { error: "Sem conexão com o servidor. Verifique sua rede." };
       }
     },
@@ -122,7 +125,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const login = useCallback(
     async (username: string, password: string): Promise<{ error?: string }> => {
       try {
-        const res = await fetch(apiUrl("/auth/login"), {
+        const url = apiUrl("/auth/login");
+        console.log("[AuthContext] Tentando Login em:", url);
+        const res = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ username, password }),
@@ -131,7 +136,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         if (!res.ok) return { error: data.error ?? "Credenciais inválidas" };
         await persistSession({ token: data.token, user: data.user });
         return {};
-      } catch {
+      } catch (err: any) {
+        console.error("[AuthContext] Erro no Login:", err);
         return { error: "Sem conexão com o servidor. Verifique sua rede." };
       }
     },
