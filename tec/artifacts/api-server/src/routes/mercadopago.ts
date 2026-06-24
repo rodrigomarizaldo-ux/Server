@@ -59,7 +59,7 @@ router.post("/create-payment", requireAuth, async (req: Request, res: Response) 
 
   try {
     const payload = {
-      transaction_amount: 70,
+      transaction_amount: 75,
       token: cardTokenId,
       description: "Assinatura mensal de máquina pesada - Tecmaquinas",
       installments,

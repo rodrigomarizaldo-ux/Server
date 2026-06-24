@@ -16,6 +16,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { SyncProvider } from "@/contexts/SyncContext";
+import { configurePurchases } from "@/utils/purchases";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -59,6 +60,10 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [fontsLoaded, fontError]);
+
+  useEffect(() => {
+    configurePurchases();
+  }, []);
 
   if (!fontsLoaded && !fontError) return null;
 

@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "expo-clipboard": "^55.0.13",
+    "react-native-purchases": "^10.4.0",
     "react-qr-code": "^2.0.21"
   }
 }
