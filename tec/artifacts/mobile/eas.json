@@ -8,7 +8,8 @@
         "buildType": "apk"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://server-production-64cf.up.railway.app"
+        "EXPO_PUBLIC_API_URL": "https://server-production-64cf.up.railway.app",
+        "EXPO_PUBLIC_REVENUE_ANDROID_API_KEY": "test_uZCVftOkxjhNMNPsIXpWSgrzPik"
       }
     },
     "production": {
@@ -16,7 +17,8 @@
         "buildType": "app-bundle"
       },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://server-production-64cf.up.railway.app"
+        "EXPO_PUBLIC_API_URL": "https://server-production-64cf.up.railway.app",
+        "EXPO_PUBLIC_REVENUE_ANDROID_API_KEY": "test_uZCVftOkxjhNMNPsIXpWSgrzPik"
       }
     }
   },
