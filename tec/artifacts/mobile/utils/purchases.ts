@@ -1,17 +1,37 @@
 import { Platform } from "react-native";
 import Purchases, { type PurchasesOffering, type PurchasesPackage } from "react-native-purchases";
 
-// Chave da API Pública da RevenueCat para Android (será lida de variáveis de ambiente no build)
-const REVENUECAT_API_KEY = process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY || "goog_mock_api_key_placeholder";
+// Chave da API Pública da RevenueCat para Android (lida de variáveis de ambiente no build)
+const REVENUECAT_API_KEY = process.env.EXPO_PUBLIC_REVENUECAT_ANDROID_API_KEY;
 
 /**
- * Inicializa o SDK da RevenueCat
+ * Inicializa o SDK da RevenueCat com segurança
  */
 export function configurePurchases() {
-  if (Platform.OS === "android" || Platform.OS === "ios") {
-    // Configura o SDK. Em produção ou build do EAS, ele pegará a chave configurada
-    Purchases.configure({ apiKey: REVENUECAT_API_KEY });
-    console.log("RevenueCat configurado com sucesso.");
+  try {
+    if (Platform.OS === "android" || Platform.OS === "ios") {
+      // Se não houver chave configurada, não inicializa para evitar crashes nativos
+      if (!REVENUECAT_API_KEY || REVENUECAT_API_KEY.includes("placeholder")) {
+        console.warn("Chave do RevenueCat não configurada ou inválida. Ignorando inicialização.");
+        return;
+      }
+      
+      Purchases.configure({ apiKey: REVENUECAT_API_KEY });
+      console.log("RevenueCat configurado com sucesso.");
+    }
+  } catch (e) {
+    console.error("Erro nativo ao inicializar o RevenueCat:", e);
+  }
+}
+
+/**
+ * Verifica se o RevenueCat foi configurado com sucesso
+ */
+export async function isPurchasesConfigured(): Promise<boolean> {
+  try {
+    return await Purchases.isConfigured();
+  } catch {
+    return false;
   }
 }
 
@@ -20,9 +40,14 @@ export function configurePurchases() {
  */
 export async function getSubscriptionPackage(): Promise<PurchasesPackage | null> {
   try {
+    const configured = await isPurchasesConfigured();
+    if (!configured) {
+      console.warn("RevenueCat não está configurado. Retornando nulo.");
+      return null;
+    }
+
     const offerings = await Purchases.getOfferings();
     if (offerings.current !== null && offerings.current.availablePackages.length > 0) {
-      // Retorna o pacote mensal padrão (ou o primeiro disponível)
       const monthly = offerings.current.monthly;
       return monthly || offerings.current.availablePackages[0];
     }
@@ -39,10 +64,12 @@ export async function purchaseSubscription(
   pack: PurchasesPackage
 ): Promise<{ success: boolean; customerInfo?: any; error?: string }> {
   try {
+    const configured = await isPurchasesConfigured();
+    if (!configured) {
+      return { success: false, error: "Serviço de faturamento não configurado no aplicativo." };
+    }
+
     const { customerInfo } = await Purchases.purchasePackage(pack);
-    
-    // Verifica se a assinatura está ativa (exemplo: entitlement correspondente ao seu produto)
-    // Se você configurou um entitlement no painel do RevenueCat chamado "premium" ou "active_subscription"
     const entitlements = customerInfo.entitlements.active;
     const hasActiveSubscription = Object.keys(entitlements).length > 0;
 
