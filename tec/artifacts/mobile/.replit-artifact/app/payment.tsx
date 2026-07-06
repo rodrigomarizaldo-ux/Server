@@ -11,7 +11,6 @@ import {
   View,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { type PurchasesPackage } from "react-native-purchases";
 
 import Colors from "@/constants/colors";
 import { useAuth } from "@/contexts/AuthContext";
@@ -24,7 +23,7 @@ export default function PaymentScreen() {
 
   const [loading, setLoading] = useState(false);
   const [fetchingPackage, setFetchingPackage] = useState(true);
-  const [subPackage, setSubPackage] = useState<PurchasesPackage | null>(null);
+  const [subPackage, setSubPackage] = useState<any | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 

@@ -344,28 +344,17 @@ export default function MachinesScreen() {
             <Feather name="user" size={20} color={Colors.light.tint} />
           </Pressable>
 
-          {/* Add button — usa crédito se disponível, senão vai ao pagamento */}
+          {/* Add button — vai diretamente ao cadastro no modo de testes */}
           <View style={styles.fabWrapper}>
             <Pressable
               onPress={async () => {
                 if (Platform.OS !== "web") Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                const credit = await getAvailableCredit();
-                if (credit) {
-                  router.push("/machine/new");
-                } else {
-                  router.push("/payment");
-                }
+                router.push("/machine/new");
               }}
               style={({ pressed }) => [styles.addBtn, { opacity: pressed ? 0.85 : 1 }]}
             >
               <Feather name="plus" size={22} color={Colors.light.tintText} />
             </Pressable>
-            {hasCredit && (
-              <View style={styles.creditBadge} pointerEvents="none">
-                <Feather name="check-circle" size={10} color={Colors.light.tintText} />
-                <Text style={styles.creditBadgeText}>crédito</Text>
-              </View>
-            )}
           </View>
         </View>
       </View>
